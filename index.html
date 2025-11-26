@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ailun Saúde - Sistema de Telemedicina" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Ailun Saúde Digital - Login</title>
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>🏥 Ailun Saúde Digital — Login</h1>
+      <form id="login-form">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required autocomplete="username" />
+        <label for="password">Senha</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password" />
+        <div class="row">
+          <button type="button" id="role-paciente" class="outline">Paciente</button>
+          <button type="button" id="role-admin" class="outline">Administrador</button>
+        </div>
+        <button id="login-button" type="submit">
+          <span class="button-text">Entrar</span>
+          <span class="button-loading" style="display: none;">🔄 Entrando...</span>
+        </button>
+      </form>
+      <div id="status" class="status"></div>
+      <div id="dashboard" class="dashboard" hidden>
+        <div class="topbar">
+          <h2>Admin — Gestão de Beneficiários</h2>
+          <button id="logout-button" class="outline">Sair</button>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-target="tab-create">Cadastrar</button>
+          <button class="tab" data-target="tab-beneficiaries">Beneficiários</button>
+          <button class="tab" data-target="tab-delete">Inativar</button>
+          <button class="tab" data-target="tab-appointment">Solicitar Atendimento</button>
+          <button class="tab" data-target="tab-schedule">Agendamentos</button>
+        </div>
+        <div class="tab-content" id="tab-create">
+          <div class="card">
+            <h3>Cadastrar Beneficiário</h3>
+            <div class="grid">
+              <div>
+                <label for="b-name">Nome</label>
+                <input id="b-name" required />
+              </div>
+              <div>
+                <label for="b-cpf">CPF</label>
+                <input id="b-cpf" inputmode="numeric" required />
+              </div>
+              <div>
+                <label for="b-birthday">Nascimento (yyyy-MM-dd)</label>
+                <input id="b-birthday" type="date" placeholder="2000-01-01" required />
+              </div>
+              <div>
+                <label for="b-email">Email</label>
+                <input id="b-email" />
+              </div>
+              <div>
+                <label for="b-phone">Telefone</label>
+                <input id="b-phone" inputmode="tel" />
+              </div>
+              <div>
+                <label for="b-zip">CEP</label>
+                <input id="b-zip" inputmode="numeric" />
+              </div>
+              <div>
+                <label for="b-payment">Pagamento</label>
+                <select id="b-payment">
+                  <option value="S" selected>Recorrente</option>
+                  <option value="A">Consulta</option>
+                </select>
+              </div>
+              <div>
+                <label for="b-service">Serviço</label>
+                <select id="b-service">
+                  <option value="G" selected>Clínico</option>
+                  <option value="P">Psicologia</option>
+                  <option value="GP">Clínico + Psicologia</option>
+                  <option value="GS">Clínico + Especialista</option>
+                  <option value="GSP">Clínico + Especialistas + Psicologia</option>
+                </select>
+              </div>
+              <div>
+                <label for="b-holder">Titular (CPF)</label>
+                <input id="b-holder" />
+              </div>
+              <div>
+                <label for="b-general">General</label>
+                <input id="b-general" />
+              </div>
+            </div>
+            <div class="row">
+              <button id="beneficiary-add" class="outline">Adicionar à lista</button>
+              <button id="beneficiary-reset" class="outline">Limpar</button>
+            </div>
+            <div class="list" id="beneficiary-list"></div>
+            <div class="row">
+              <button id="beneficiary-submit">Cadastrar Todos</button>
+            </div>
+            <div id="beneficiary-status" class="status"></div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-appointment" hidden>
+          <div class="card">
+            <h3>Solicitar Atendimento</h3>
+            <form id="appointment-form">
+              <label for="a-uuid">UUID do Beneficiário</label>
+              <input id="a-uuid" required />
+              <button type="submit">Solicitar</button>
+            </form>
+            <div id="appointment-status" class="status"></div>
+            <a id="appointment-url" target="_blank"></a>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-schedule" hidden>
+          <div class="card">
+            <h3>Agendar Consulta</h3>
+            <div class="grid">
+              <div>
+                <label for="s-uuid">UUID do Beneficiário</label>
+                <input id="s-uuid" />
+              </div>
+              <div>
+                <label for="s-type">Tipo</label>
+                <select id="s-type">
+                  <option value="MEDICA" selected>Especialidade Médica (requer encaminhamento)</option>
+                  <option value="NUTRICAO">Nutrição (direto)</option>
+                  <option value="PSICOLOGIA">Psicologia (direto)</option>
+                </select>
+              </div>
+              <div>
+                <label for="s-specialty-uuid">UUID da Especialidade</label>
+                <input id="s-specialty-uuid" />
+              </div>
+              <div>
+                <label for="s-availability-uuid">UUID da Disponibilidade</label>
+                <input id="s-availability-uuid" />
+              </div>
+              <div>
+                <label for="s-referral-uuid">UUID do Encaminhamento</label>
+                <input id="s-referral-uuid" placeholder="Obrigatório para Especialidade Médica" />
+              </div>
+              <div>
+                <label>
+                  <input type="checkbox" id="s-approve" /> Aprovar pagamento adicional
+                </label>
+              </div>
+              <div>
+                <button id="load-referrals" class="outline">Listar Encaminhamentos</button>
+                <select id="select-referrals"></select>
+              </div>
+            </div>
+            <div class="row">
+              <button id="schedule-button">Agendar</button>
+              <button id="confirm-button" class="outline">Confirmar</button>
+            </div>
+            <div id="schedule-status" class="status"></div>
+          </div>
+          <div class="card">
+            <h3>Agendamentos</h3>
+            <div class="row">
+              <input id="filter-uuid" placeholder="Filtrar por UUID" />
+              <select id="filter-specialty">
+                <option value="">Todas</option>
+                <option value="MEDICA">Especialidade Médica</option>
+                <option value="NUTRICAO">Nutrição</option>
+                <option value="PSICOLOGIA">Psicologia</option>
+              </select>
+              <button id="filter-apply" class="outline">Filtrar</button>
+            </div>
+            <div class="row">
+              <button id="load-specialties" class="outline">Carregar Especialidades</button>
+              <select id="select-specialty"></select>
+              <input id="specialty-search" placeholder="Filtrar especialidade por nome" />
+              <input id="date-initial" placeholder="Data inicial dd/MM/yyyy" />
+              <input id="date-final" placeholder="Data final dd/MM/yyyy" />
+              <button id="load-availability" class="outline">Carregar Disponibilidade</button>
+              <select id="select-availability"></select>
+            </div>
+            <div class="table" id="appointments-table"></div>
+          </div>
+          <div class="card">
+            <h3>Todos os Agendamentos</h3>
+            <div class="row">
+              <button id="load-appointments" class="outline">Carregar</button>
+            </div>
+            <div class="table" id="all-appointments"></div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-beneficiaries" hidden>
+          <div class="card">
+            <h3>Gestão de Beneficiários</h3>
+            <div class="row">
+              <input id="ben-cpf" placeholder="CPF para buscar" />
+              <button id="ben-find" class="outline">Buscar por CPF</button>
+              <button id="ben-load" class="outline">Carregar todos</button>
+              <select id="ben-filter-status">
+                <option value="">Todos</option>
+                <option value="ativo">Ativos</option>
+                <option value="inativo">Inativos</option>
+              </select>
+              <button id="ben-load-inactive" class="outline">Listar inativos</button>
+            </div>
+            <div class="table" id="ben-table"></div>
+            <div class="grid">
+              <div>
+                <label for="ben-selected">UUID Selecionado</label>
+                <input id="ben-selected" readonly />
+              </div>
+              <div>
+                <label for="ben-email">Email</label>
+                <input id="ben-email" />
+              </div>
+              <div>
+                <label for="ben-phone">Telefone</label>
+                <input id="ben-phone" />
+              </div>
+              <div>
+                <label for="ben-zip">CEP</label>
+                <input id="ben-zip" />
+              </div>
+              <div>
+                <label for="ben-address">Endereço</label>
+                <input id="ben-address" />
+              </div>
+              <div>
+                <label for="ben-city">Cidade</label>
+                <input id="ben-city" />
+              </div>
+              <div>
+                <label for="ben-state">Estado</label>
+                <input id="ben-state" />
+              </div>
+            </div>
+            <div class="row">
+              <button id="ben-save">Salvar Atualização</button>
+              <button id="ben-reactivate-selected" class="outline">Reativar Selecionado</button>
+            </div>
+            <div id="ben-status" class="status"></div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="tab-delete" hidden>
+          <div class="card">
+            <h3>Inativar Beneficiário</h3>
+            <form id="delete-form">
+              <label for="d-uuid">UUID do Beneficiário</label>
+              <input id="d-uuid" required />
+              <button type="submit">Inativar</button>
+            </form>
+            <div id="delete-status" class="status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
