@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
   // Headers de segurança para produção
   res.setHeader('Access-Control-Allow-Origin', isAllowedOrigin ? origin : PRODUCTION_ORIGINS[0]);
   res.setHeader('Access-Control-Allow-Credentials', 'true');
-  res.setHeader('Access-Control-Allow-Headers', 'clientId, origin, Content-Type, accept, Authorization, beneficiary, groupId, X-Session-Token, Cookie');
+  res.setHeader('Access-Control-Allow-Headers', 'clientId, origin, Content-Type, accept, Authorization, beneficiary, groupId, X-Session-Token, Cookie, URL');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
   
   // Headers de segurança adicionais
@@ -88,6 +88,7 @@ module.exports = async (req, res) => {
   const headers = { 
     clientId, 
     Authorization: `Bearer ${token}`,
+    URL: target,
     'User-Agent': 'Ailun-Saude-Vercel/1.0'
   };
 
