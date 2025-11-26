@@ -13,13 +13,7 @@
     { "source": "/assets/(.*)", "destination": "/assets/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "env": {
-    "RAPIDOC_BASE_URL": "@rapidoc_base_url",
-    "RAPIDOC_CLIENT_ID": "@rapidoc_client_id",
-    "RAPIDOC_TOKEN": "@rapidoc_token",
-    "COOKIE_SECURE": "true",
-    "NODE_ENV": "production"
-  },
+  
   "headers": [
     {
       "source": "/assets/(.*)",
