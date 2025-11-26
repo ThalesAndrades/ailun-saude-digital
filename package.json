@@ -1,0 +1,42 @@
+{
+  "name": "ailun-saude",
+  "version": "1.0.0",
+  "description": "Sistema de Telemedicina Ailun Saúde - Integrado com Rapidoc API",
+  "main": "index.html",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "build": "echo 'Build concluído - Deploy ready!'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "telemedicina",
+    "saude",
+    "rapidoc",
+    "vercel",
+    "javascript"
+  ],
+  "author": "Ailun Saúde",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "node-fetch": "^2.6.7",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "vercel": "^48.10.14"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ailunsaude/telemedicina"
+  },
+  "homepage": "https://ailun-saude.vercel.app"
+}
