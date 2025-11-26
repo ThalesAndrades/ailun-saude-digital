@@ -1,0 +1,20 @@
+{
+  "cli": { "version": ">= 3.16.0" },
+  "build": {
+    "production": {
+      "channel": "production",
+      "android": { "buildType": "app-bundle" },
+      "ios": { "simulator": false }
+    },
+    "preview": {
+      "channel": "preview",
+      "developmentClient": true
+    }
+  },
+  "submit": {
+    "production": {
+      "android": { "serviceAccountKeyPath": "./play-service-account.json" },
+      "ios": { "ascAppId": "" }
+    }
+  }
+}
