@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - RAPIDOC_BASE_URL=${RAPIDOC_BASE_URL}
+      - RAPIDOC_CLIENT_ID=${RAPIDOC_CLIENT_ID}
+      - RAPIDOC_TOKEN=${RAPIDOC_TOKEN}
