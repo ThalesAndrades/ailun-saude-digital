@@ -35,7 +35,7 @@
     "vercel": "^48.10.14"
   },
   "engines": {
-    "node": "24.x"
+    "node": "20.x"
   },
   "repository": {
     "type": "git",
