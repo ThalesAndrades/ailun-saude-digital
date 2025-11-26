@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "Ailun Saúde Digital",
+    "slug": "ailun-saude-digital",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "splash": { "backgroundColor": "#0f172a", "resizeMode": "contain" },
+    "updates": { "fallbackToCacheTimeout": 0 },
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": true, "bundleIdentifier": "com.ailun.saudedigital" },
+    "android": { "package": "com.ailun.saudedigital" },
+    "web": { "bundler": "metro" },
+    "extra": {
+      "EXPO_PUBLIC_API_BASE_URL": "https://ailun-saude.vercel.app/api"
+    }
+  }
+}
