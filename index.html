@@ -9,6 +9,11 @@
     <title>Ailun Saúde Digital - Login</title>
     <link rel="stylesheet" href="assets/style.css" />
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>" />
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/speed-insights/script.js"></script>
   </head>
   <body>
     <div class="container">
@@ -262,5 +267,26 @@
       </div>
     </div>
     <script src="assets/app.js"></script>
+    <!-- Vercel Speed Insights Configuration -->
+    <script src="speed-insights-config.js"></script>
+    <!-- Vercel Speed Insights Initialization -->
+    <script>
+      // Initialize Speed Insights after config loads
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.initializeSpeedInsights) {
+          window.initializeSpeedInsights();
+        } else {
+          // Fallback initialization
+          if (window.si) {
+            window.si('init', {
+              project: 'ailun-saude',
+              branch: 'main',
+              environment: 'production'
+            });
+            console.log('✅ Vercel Speed Insights initialized (fallback)');
+          }
+        }
+      });
+    </script>
   </body>
 </html>
